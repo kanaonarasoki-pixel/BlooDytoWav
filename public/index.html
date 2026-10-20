@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#15131c">
+  <meta name="description" content="Convierte archivos de audio a WAV, estima Key y BPM y prepara un master de forma local.">
+  <title>BlooDytoWav — Tu espacio de audio</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+<div class="shell">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand"><div class="brand-mark" aria-hidden="true">♫</div><div class="brand-name">BlooDy<span>toWav</span></div></div>
+    <div class="nav-label">ESTUDIO</div>
+    <nav class="nav" aria-label="Herramientas">
+      <button class="active" data-page="youtube"><span aria-hidden="true">⇩</span> Audio a WAV</button>
+      <button data-page="analyzer"><span aria-hidden="true">⌁</span> Key &amp; BPM</button>
+      <button data-page="mastering"><span aria-hidden="true">✧</span> Mastering Studio</button>
+    </nav>
+    <div class="side-bottom">
+      <div class="pro-card"><small>PROCESAMIENTO LOCAL</small><p>Los archivos se procesan en este navegador y no se envían a un servidor.</p><button id="privacy-info">Más información&nbsp; →</button></div>
+      <div class="profile"><div class="avatar">BD</div><div><b>Mi estudio</b><small>Sesión local</small></div></div>
+    </div>
+  </aside>
+  <main class="main">
+    <header class="topbar">
+      <button class="icon-btn mobilemenu" id="menu" aria-label="Abrir menú">☰</button>
+      <div class="mobilebrand"><div class="brand-mark">♫</div>BlooDytoWav</div>
+      <div class="crumb">Estudio <span> / </span> <b id="crumb">Audio a WAV</b></div>
+      <div class="top-actions"><div class="status"><i class="dot"></i> Procesamiento local</div><button class="icon-btn" id="notifications" aria-label="Estado del estudio">i</button></div>
+    </header>
+    <section class="hero"><div><div class="eyebrow">TU ESPACIO DE AUDIO</div><h1 id="title">Prepara tu audio<br>a tu manera.</h1><p id="subtitle">Convierte, analiza y pule tus archivos de audio desde un solo lugar.</p></div><div class="hero-note">Diseñado para creadores y productores</div></section>
+    <div class="section-tabs" role="tablist" aria-label="Herramientas de audio">
+      <button class="active" role="tab" aria-selected="true" data-page="youtube">Audio a WAV</button><button role="tab" aria-selected="false" data-page="analyzer">Key &amp; BPM</button><button role="tab" aria-selected="false" data-page="mastering">Mastering Studio</button>
+    </div>
+    <section class="panel active" id="panel-youtube" aria-labelledby="page-youtube">
+      <div class="grid">
+        <div class="card">
+          <div class="card-head"><div><h2 id="page-youtube">Convertir audio a WAV</h2><p>Elige un archivo de audio y descarga una copia WAV.</p></div><span class="tag">CONVERSIÓN LOCAL</span></div>
+          <label class="dropzone" id="drop1" for="file1" tabindex="0"><span class="upload-icon" aria-hidden="true">↑</span><b>Arrastra un archivo o <span>elige desde tu dispositivo</span></b><small>MP3, WAV, FLAC, M4A u otros formatos compatibles</small><small class="file-name" id="filename1">Los archivos no se suben a internet.</small><input id="file1" type="file" accept="audio/*" aria-label="Elegir archivo de audio para convertir"></label>
+          <div class="options"><div><label class="field-label" for="quality">Frecuencia de muestreo</label><select id="quality" class="select"><option value="44100">WAV · 44,1 kHz</option><option value="48000">WAV · 48 kHz</option><option value="96000">WAV · 96 kHz</option></select></div><div><label class="field-label" for="channels">Canales</label><select id="channels" class="select"><option value="2">Estéreo</option><option value="1">Mono</option></select></div></div>
+          <button class="primary" id="convert">Elegir archivo de audio&nbsp; →</button><p class="microcopy">Un enlace de YouTube no proporciona el archivo de audio. Usa una copia que tengas derecho a procesar.</p>
+        </div>
+        <div class="side-stack"><div class="card mini"><div class="mini-title"><h3>Actividad de esta sesión</h3><span id="activity-count">0 archivos</span></div><ul class="activity-list" id="activity-list"><li class="empty">Tus archivos procesados aparecerán aquí.</li></ul></div><div class="feature"><div class="feature-icon">✓</div><div><b>Privado por diseño</b><p>El audio se procesa localmente. No se envía ni se almacena en un servidor.</p></div></div></div>
+      </div>
+    </section>
+    <section class="panel" id="panel-analyzer" aria-labelledby="page-analyzer">
+      <div class="card analyzer-card"><div class="card-head"><div><h2 id="page-analyzer">Analizador de Key &amp; BPM</h2><p>Obtén una estimación de tonalidad y tempo de tu pista.</p></div><span class="tag">ANÁLISIS LOCAL</span></div>
+        <label class="dropzone analyzer-drop" id="drop2" for="file2" tabindex="0"><span class="upload-icon" aria-hidden="true">♪</span><b>Arrastra tu pista o <span>elige un archivo</span></b><small>MP3, WAV, FLAC, M4A u otros formatos compatibles</small><small class="file-name" id="filename2">Selecciona un audio para empezar.</small><input id="file2" type="file" accept="audio/*" aria-label="Elegir audio para analizar"></label>
+        <div class="analyzer-results" id="results" aria-live="polite"><div class="result"><span>TONALIDAD ESTIMADA</span><strong id="keyval">—</strong><small id="relative-key">Tonalidad relativa: —</small></div><div class="result"><span>TEMPO ESTIMADO</span><strong id="bpmval">—</strong><small id="bpm-note">Pulsos por minuto</small></div></div>
+        <button class="primary" id="analyze">Elegir audio para analizar&nbsp; →</button><p class="microcopy">El tempo y la tonalidad son estimaciones; pueden variar con mezclas complejas o percusión intensa.</p>
+      </div>
+    </section>
+    <section class="panel" id="panel-mastering" aria-labelledby="page-mastering">
+      <div class="card master-card"><div class="card-head"><div><h2 id="page-mastering">Mastering Studio</h2><p>Aplica una cadena de mastering local y descarga el resultado.</p></div><span class="tag">PROCESAMIENTO LOCAL</span></div>
+        <label class="dropzone analyzer-drop" id="drop3" for="file3" tabindex="0"><span class="upload-icon" aria-hidden="true">✧</span><b>Arrastra tu mezcla o <span>elige un archivo</span></b><small>WAV, AIFF, MP3 y otros formatos compatibles</small><small class="file-name" id="filename3">Elige una mezcla para empezar.</small><input id="file3" type="file" accept="audio/*" aria-label="Elegir mezcla para masterizar"></label>
+        <div class="master-grid"><label class="master-option"><input type="radio" name="style" value="balanced" checked><span><b>Equilibrado</b><small>Control suave y acabado natural</small></span></label><label class="master-option"><input type="radio" name="style" value="warm"><span><b>Cálido</b><small>Graves suaves y color armónico</small></span></label><label class="master-option"><input type="radio" name="style" value="punchy"><span><b>Enérgico</b><small>Más ataque y compresión</small></span></label><label class="master-option"><input type="radio" name="style" value="airy"><span><b>Abierto</b><small>Más aire y amplitud percibida</small></span></label></div>
+        <button class="primary" id="master">Elegir mezcla para masterizar&nbsp; →</button><p class="microcopy">Esta versión aplica procesamiento de audio local; no usa IA ni un servicio externo.</p>
+      </div>
+    </section>
+    <footer class="foot">BlooDytoWav · Tu sonido, trabajado a tu manera.</footer>
+  </main>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
