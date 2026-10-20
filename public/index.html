@@ -4,9 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#15131c">
-  <meta name="description" content="Convierte archivos de audio a WAV, estima Key y BPM y prepara un master de forma local.">
+  <meta name="description" content="Convierte audio autorizado a WAV, estima tonalidad y tempo y prepara mezclas localmente.">
   <title>BlooDytoWav — Tu espacio de audio</title>
   <link rel="stylesheet" href="./styles.css">
+  <script src="./audio-analysis.js" defer></script>
+  <script src="./youtube-url.js" defer></script>
   <script src="./app.js" defer></script>
 </head>
 <body>
@@ -38,10 +40,18 @@
     <section class="panel active" id="panel-youtube" aria-labelledby="page-youtube">
       <div class="grid">
         <div class="card">
-          <div class="card-head"><div><h2 id="page-youtube">Convertir audio a WAV</h2><p>Elige un archivo de audio y descarga una copia WAV.</p></div><span class="tag">CONVERSIÓN LOCAL</span></div>
+          <div class="card-head"><div><h2 id="page-youtube">Convertir audio a WAV</h2><p>Convierte una fuente de audio autorizada y descarga un WAV.</p></div><span class="tag">CONVERSIÓN LOCAL</span></div>
+          <div class="urlbox" aria-labelledby="youtube-check-label">
+            <label class="field-label" id="youtube-check-label" for="youtube-url">¿Tienes un enlace de YouTube?</label>
+            <div class="url-input"><span class="url-icon" aria-hidden="true">↗</span><input id="youtube-url" type="url" inputmode="url" placeholder="https://www.youtube.com/watch?v=…" autocomplete="url"><button type="button" id="check-youtube">Comprobar enlace</button></div>
+            <p class="source-note" id="youtube-status" role="status" aria-live="polite">El botón solo comprueba el formato del enlace; no verifica que exista ni los permisos. Esta web no extrae audio de YouTube. Sube una copia de audio autorizada.</p>
+          </div>
           <label class="dropzone" id="drop1" for="file1" tabindex="0"><span class="upload-icon" aria-hidden="true">↑</span><b>Arrastra un archivo o <span>elige desde tu dispositivo</span></b><small>MP3, WAV, FLAC, M4A u otros formatos compatibles</small><small class="file-name" id="filename1">Los archivos no se suben a internet.</small><input id="file1" type="file" accept="audio/*" aria-label="Elegir archivo de audio para convertir"></label>
           <div class="options"><div><label class="field-label" for="quality">Frecuencia de muestreo</label><select id="quality" class="select"><option value="44100">WAV · 44,1 kHz</option><option value="48000">WAV · 48 kHz</option><option value="96000">WAV · 96 kHz</option></select></div><div><label class="field-label" for="channels">Canales</label><select id="channels" class="select"><option value="2">Estéreo</option><option value="1">Mono</option></select></div></div>
-          <button class="primary" id="convert">Elegir archivo de audio&nbsp; →</button><p class="microcopy">Un enlace de YouTube no proporciona el archivo de audio. Usa una copia que tengas derecho a procesar.</p>
+          <button class="primary" id="convert">Elegir archivo de audio&nbsp; →</button><p class="microcopy">Procesamos únicamente el archivo que selecciones; no se extrae audio desde YouTube.</p>
+          <div class="inline-error" id="convert-error" role="alert" hidden></div>
+          <div class="progress-message" id="convert-progress" role="status" aria-live="polite" hidden><span class="spinner" aria-hidden="true"></span><span id="convert-progress-text">Preparando el audio…</span></div>
+          <div class="conversion-result" id="convert-result" aria-live="polite" hidden><div><b>WAV listo</b><p id="wav-details"></p></div><div class="result-actions"><button type="button" class="secondary-button" id="download-wav">Descargar WAV</button><button type="button" class="text-button" id="convert-another">Convertir otro archivo</button></div></div>
         </div>
         <div class="side-stack"><div class="card mini"><div class="mini-title"><h3>Actividad de esta sesión</h3><span id="activity-count">0 archivos</span></div><ul class="activity-list" id="activity-list"><li class="empty">Tus archivos procesados aparecerán aquí.</li></ul></div><div class="feature"><div class="feature-icon">✓</div><div><b>Privado por diseño</b><p>El audio se procesa localmente. No se envía ni se almacena en un servidor.</p></div></div></div>
       </div>
@@ -50,7 +60,7 @@
       <div class="card analyzer-card"><div class="card-head"><div><h2 id="page-analyzer">Analizador de Key &amp; BPM</h2><p>Obtén una estimación de tonalidad y tempo de tu pista.</p></div><span class="tag">ANÁLISIS LOCAL</span></div>
         <label class="dropzone analyzer-drop" id="drop2" for="file2" tabindex="0"><span class="upload-icon" aria-hidden="true">♪</span><b>Arrastra tu pista o <span>elige un archivo</span></b><small>MP3, WAV, FLAC, M4A u otros formatos compatibles</small><small class="file-name" id="filename2">Selecciona un audio para empezar.</small><input id="file2" type="file" accept="audio/*" aria-label="Elegir audio para analizar"></label>
         <div class="analyzer-results" id="results" aria-live="polite"><div class="result"><span>TONALIDAD ESTIMADA</span><strong id="keyval">—</strong><small id="relative-key">Tonalidad relativa: —</small></div><div class="result"><span>TEMPO ESTIMADO</span><strong id="bpmval">—</strong><small id="bpm-note">Pulsos por minuto</small></div></div>
-        <button class="primary" id="analyze">Elegir audio para analizar&nbsp; →</button><p class="microcopy">El tempo y la tonalidad son estimaciones; pueden variar con mezclas complejas o percusión intensa.</p>
+        <button class="primary" id="analyze">Elegir audio para analizar&nbsp; →</button><div class="progress-message" id="analysis-progress" role="status" aria-live="polite" hidden><span class="spinner" aria-hidden="true"></span><span id="analysis-progress-text">Analizando audio…</span></div><p class="microcopy">Analiza hasta 120 segundos iniciales. El tempo y la tonalidad son estimaciones y pueden variar con mezclas complejas o polirritmia.</p>
       </div>
     </section>
     <section class="panel" id="panel-mastering" aria-labelledby="page-mastering">

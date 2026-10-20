@@ -5,6 +5,7 @@ const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 const toastNode = $('#toast');
 let toastTimer;
 const activity = [];
+let pendingWav = null;
 
 function toast(message) {
   toastNode.textContent = message;
@@ -58,6 +59,38 @@ function downloadBlob(blob, filename) {
   link.remove();
   setTimeout(() => URL.revokeObjectURL(url), 30000);
 }
+function formatBytes(bytes) {
+  if (!Number.isFinite(bytes) || bytes < 0) return 'tamaño desconocido';
+  if (bytes < 1024) return `${bytes} B`;
+  const units = ['KB', 'MB', 'GB'];
+  let value = bytes / 1024, unit = units[0];
+  for (let i = 1; value >= 1024 && i < units.length; i++) { value /= 1024; unit = units[i]; }
+  return `${value.toFixed(1)} ${unit}`;
+}
+function formatDuration(seconds) {
+  const whole = Math.max(0, Math.round(seconds));
+  return `${Math.floor(whole / 60)}:${String(whole % 60).padStart(2, '0')}`;
+}
+function setYouTubeStatus(message, kind = 'notice') {
+  const status = $('#youtube-status');
+  status.textContent = message;
+  status.className = `source-note source-note--${kind}`;
+}
+$('#check-youtube').addEventListener('click', () => {
+  const parser = window.BlooDyYouTubeUrl;
+  if (!parser) { setYouTubeStatus('No se pudo cargar el validador. Recarga la página e inténtalo otra vez.', 'error'); return; }
+  const id = parser.getVideoId($('#youtube-url').value);
+  if (!id) {
+    setYouTubeStatus('No parece un enlace de vídeo válido de YouTube. Comprueba que incluya un ID de vídeo válido.', 'error');
+    $('#youtube-url').focus();
+    return;
+  }
+  setYouTubeStatus(`Formato de enlace válido (ID ${id}); esto no comprueba que el vídeo exista ni que tengas permiso. Esta web no extrae su audio. Sube una copia de audio autorizada para convertirla.`, 'notice');
+});
+$('#youtube-url').addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') { event.preventDefault(); $('#check-youtube').click(); }
+});
+$('#youtube-url').addEventListener('input', () => setYouTubeStatus('Comprueba el formato del enlace. La conversión requiere un archivo de audio autorizado.', 'notice'));
 function encodeWav(buffer, sampleRate, channels) {
   const frames = buffer.length;
   const bytesPerSample = 2;
@@ -110,6 +143,7 @@ async function resample(buffer, sampleRate) {
 }
 function setBusy(button, busy, text) {
   button.disabled = busy;
+  button.setAttribute('aria-busy', String(busy));
   if (text) button.textContent = text;
 }
 
@@ -122,11 +156,20 @@ function setupPicker(id, buttonId, emptyLabel, selectedLabel, handler) {
   picked[id] = null;
   function acceptFile(file) {
     if (!file) return;
-    if (!file.type.startsWith('audio/')) {
+    const audioExtension = /\.(wav|mp3|flac|m4a|aac|ogg|opus|aiff?|caf|webm)$/i.test(file.name);
+    if (!file.type.startsWith('audio/') && !audioExtension) {
+      picked[id] = null;
+      input.value = '';
+      name.textContent = 'Elige un archivo de audio compatible.';
+      button.textContent = emptyLabel;
       toast('Elige un archivo de audio compatible con tu navegador.');
       return;
     }
     if (file.size > 300 * 1024 * 1024) {
+      picked[id] = null;
+      input.value = '';
+      name.textContent = 'El archivo supera el límite de 300 MB.';
+      button.textContent = emptyLabel;
       toast('El archivo supera el límite de 300 MB.');
       return;
     }
@@ -134,6 +177,17 @@ function setupPicker(id, buttonId, emptyLabel, selectedLabel, handler) {
     name.textContent = file.name;
     button.textContent = selectedLabel;
     button.disabled = false;
+    if (id === 'file1') {
+      pendingWav = null;
+      $('#convert-result').hidden = true;
+      $('#convert-progress').hidden = true;
+      $('#convert-error').hidden = true;
+    } else if (id === 'file2') {
+      $('#analysis-progress').hidden = true;
+      $('#analysis-progress').classList.remove('progress-message--error');
+      $('#analysis-progress .spinner').hidden = false;
+      $('#results').style.display = 'none';
+    }
   }
   input.addEventListener('change', () => acceptFile(input.files[0]));
   drop.addEventListener('keydown', (event) => {
@@ -158,102 +212,85 @@ function setupPicker(id, buttonId, emptyLabel, selectedLabel, handler) {
   button.textContent = emptyLabel;
 }
 
-setupPicker('file1', 'convert', 'Elegir archivo de audio  →', 'Convertir y descargar WAV  →', async (file, button) => {
+setupPicker('file1', 'convert', 'Elegir archivo de audio  →', 'Convertir a WAV  →', async (file, button) => {
   try {
+    pendingWav = null;
+    $('#convert-error').hidden = true;
+    $('#convert-result').hidden = true;
+    $('#convert-progress').hidden = false;
+    $('#convert-progress-text').textContent = 'Leyendo y decodificando el archivo…';
     setBusy(button, true, 'Preparando el WAV…');
     const decoded = await decodeFile(file);
+    $('#convert-progress-text').textContent = 'Convirtiendo y preparando el archivo WAV…';
     const rate = Number($('#quality').value);
     const output = await resample(decoded, rate);
     const channels = Number($('#channels').value);
     const wav = encodeWav(output, rate, channels);
-    downloadBlob(wav, `${safeBaseName(file.name)}-${rate / 1000}kHz.wav`);
+    if (!wav.size) throw new Error('El WAV resultante está vacío; el archivo de origen no se pudo procesar.');
+    const filename = `${safeBaseName(file.name)}-${rate / 1000}kHz.wav`;
+    pendingWav = {blob: wav, filename};
+    $('#wav-details').textContent = `${filename} · ${formatDuration(output.duration)} · ${rate.toLocaleString('es-ES')} Hz · ${channels === 1 ? 'mono' : 'estéreo'} · ${formatBytes(wav.size)}`;
+    $('#convert-result').hidden = false;
     addActivity(file.name, 'WAV exportado');
-    toast('WAV creado y descargado.');
+    toast('El archivo WAV está listo para descargar.');
   } catch (error) {
-    console.error(error); toast(error.message || 'No se pudo convertir el archivo. Prueba con MP3 o WAV.');
-  } finally { setBusy(button, false, 'Convertir y descargar WAV  →'); }
+    const message = error.message || 'No se pudo convertir el archivo. Prueba con WAV o MP3.';
+    console.error(error);
+    $('#convert-error').textContent = message;
+    $('#convert-error').hidden = false;
+    toast(message);
+  } finally {
+    $('#convert-progress').hidden = true;
+    setBusy(button, false, 'Convertir a WAV  →');
+  }
+});
+$('#download-wav').addEventListener('click', () => {
+  if (!pendingWav) { toast('Primero convierte un archivo de audio.'); return; }
+  downloadBlob(pendingWav.blob, pendingWav.filename);
+  toast('Descarga iniciada.');
+});
+$('#convert-another').addEventListener('click', () => {
+  pendingWav = null;
+  picked.file1 = null;
+  $('#file1').value = '';
+  $('#filename1').textContent = 'Los archivos no se suben a internet.';
+  $('#convert').textContent = 'Elegir archivo de audio  →';
+  $('#convert-result').hidden = true;
+  $('#file1').click();
 });
 
 const noteNames = ['C', 'C♯', 'D', 'D♯', 'E', 'F', 'F♯', 'G', 'G♯', 'A', 'A♯', 'B'];
-const keyProfiles = [
-  [6.35,2.23,3.48,2.33,4.38,4.09,2.52,5.19,2.39,3.66,2.29,2.88],
-  [6.33,2.68,3.52,5.38,2.60,3.53,2.54,4.75,3.98,2.69,3.34,3.17]
-];
-function analyzeTempo(buffer) {
-  const data = buffer.getChannelData(0);
-  const hop = Math.max(1, Math.floor(buffer.sampleRate * 0.01));
-  const maxFrames = Math.min(data.length, buffer.sampleRate * 90);
-  const envelope = [];
-  let previous = 0;
-  for (let start = 0; start < maxFrames; start += hop) {
-    const end = Math.min(start + hop, maxFrames);
-    let sum = 0;
-    for (let i = start; i < end; i++) sum += data[i] * data[i];
-    const rms = Math.sqrt(sum / Math.max(1, end - start));
-    envelope.push(Math.max(0, rms - previous)); previous = rms;
-  }
-  const average = envelope.reduce((sum, value) => sum + value, 0) / Math.max(1, envelope.length);
-  for (let i = 0; i < envelope.length; i++) envelope[i] = Math.max(0, envelope[i] - average * 0.25);
-  let bestBpm = 0, bestScore = -Infinity;
-  for (let bpm = 60; bpm <= 180; bpm++) {
-    const lag = Math.round(6000 / bpm);
-    if (lag >= envelope.length) continue;
-    let score = 0, a = 0, b = 0;
-    for (let i = lag; i < envelope.length; i++) { score += envelope[i] * envelope[i - lag]; a += envelope[i] ** 2; b += envelope[i - lag] ** 2; }
-    score /= Math.sqrt(a * b) || 1;
-    if (score > bestScore) { bestScore = score; bestBpm = bpm; }
-  }
-  return {bpm: bestBpm, score: bestScore};
-}
-function analyzeKey(buffer) {
-  const input = buffer.getChannelData(0);
-  const maxSeconds = Math.min(buffer.duration, 5);
-  const factor = Math.max(1, Math.floor(buffer.sampleRate / 11025));
-  const samples = [];
-  for (let i = 0, end = Math.floor(maxSeconds * buffer.sampleRate); i < end; i += factor) samples.push(input[i]);
-  const rate = buffer.sampleRate / factor;
-  const chroma = Array(12).fill(0);
-  for (let midi = 36; midi <= 83; midi++) {
-    const frequency = 440 * 2 ** ((midi - 69) / 12);
-    if (frequency >= rate / 2) continue;
-    const coefficient = 2 * Math.cos(2 * Math.PI * frequency / rate);
-    let q1 = 0, q2 = 0;
-    for (const sample of samples) { const q0 = coefficient * q1 - q2 + sample; q2 = q1; q1 = q0; }
-    chroma[midi % 12] += Math.max(0, q1 * q1 + q2 * q2 - coefficient * q1 * q2);
-  }
-  const mean = chroma.reduce((sum, value) => sum + value, 0) / 12;
-  const centered = chroma.map(value => value - mean);
-  let best = {score: -Infinity, root: 0, mode: 0};
-  keyProfiles.forEach((profile, mode) => {
-    const profileMean = profile.reduce((sum, value) => sum + value, 0) / 12;
-    const pattern = profile.map(value => value - profileMean);
-    for (let root = 0; root < 12; root++) {
-      let dot = 0, normA = 0, normB = 0;
-      for (let i = 0; i < 12; i++) { const value = centered[(i + root) % 12]; dot += value * pattern[i]; normA += value * value; normB += pattern[i] * pattern[i]; }
-      const score = dot / (Math.sqrt(normA * normB) || 1);
-      if (score > best.score) best = {score, root, mode};
-    }
-  });
-  return best;
-}
 setupPicker('file2', 'analyze', 'Elegir audio para analizar  →', 'Analizar Key y BPM  →', async (file, button) => {
   try {
+    $('#analysis-progress').classList.remove('progress-message--error');
+    $('#analysis-progress .spinner').hidden = false;
+    $('#analysis-progress-text').textContent = 'Analizando espectro y pulsos…';
+    $('#analysis-progress').hidden = false;
     setBusy(button, true, 'Analizando audio…');
     const buffer = await decodeFile(file);
-    const key = analyzeKey(buffer);
-    const tempo = analyzeTempo(buffer);
+    if (!window.BlooDyAudioAnalysis) throw new Error('No se pudo cargar el analizador. Recarga la página e inténtalo otra vez.');
+    const tempo = window.BlooDyAudioAnalysis.analyzeTempo(buffer);
+    const key = window.BlooDyAudioAnalysis.analyzeKey(buffer);
     if (!tempo.bpm || !Number.isFinite(tempo.bpm)) throw new Error('No se detectó un pulso claro. Prueba con una pista más rítmica.');
     const minor = key.mode === 1;
     const relative = noteNames[(key.root + (minor ? 3 : 9)) % 12];
     $('#keyval').textContent = `${noteNames[key.root]} ${minor ? 'menor' : 'mayor'}`;
-    $('#relative-key').textContent = `Relativa ${minor ? 'mayor' : 'menor'}: ${relative}`;
+    const keyQuality = key.confidence < 0.2 || key.margin < 0.015 ? 'Tonalidad poco definida' : 'Estimación espectral';
+    $('#relative-key').textContent = `Relativa ${minor ? 'mayor' : 'menor'}: ${relative} · ${keyQuality}`;
     $('#bpmval').innerHTML = `${tempo.bpm} <small>BPM</small>`;
-    $('#bpm-note').textContent = tempo.score < 0.08 ? 'Pulso poco definido; resultado aproximado' : 'Pulsos por minuto';
+    $('#bpm-note').textContent = tempo.score < 0.12 ? 'Pulso poco definido; resultado aproximado' : `Pulsos por minuto · ${Math.round(tempo.analyzedSeconds)} s analizados`;
     $('#results').style.display = 'grid';
+    $('#analysis-progress').hidden = true;
     addActivity(file.name, 'Key/BPM analizados');
     toast('Análisis terminado. Los valores son estimaciones.');
   } catch (error) {
-    console.error(error); toast(error.message || 'No se pudo analizar el audio. Prueba con WAV o MP3.');
+    const message = error.message || 'No se pudo analizar el audio. Prueba con WAV o MP3.';
+    console.error(error);
+    $('#analysis-progress').classList.add('progress-message--error');
+    $('#analysis-progress .spinner').hidden = true;
+    $('#analysis-progress-text').textContent = message;
+    $('#analysis-progress').hidden = false;
+    toast(message);
   } finally { setBusy(button, false, 'Analizar Key y BPM  →'); }
 });
 
