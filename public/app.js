@@ -71,26 +71,6 @@ function formatDuration(seconds) {
   const whole = Math.max(0, Math.round(seconds));
   return `${Math.floor(whole / 60)}:${String(whole % 60).padStart(2, '0')}`;
 }
-function setYouTubeStatus(message, kind = 'notice') {
-  const status = $('#youtube-status');
-  status.textContent = message;
-  status.className = `source-note source-note--${kind}`;
-}
-$('#check-youtube').addEventListener('click', () => {
-  const parser = window.BlooDyYouTubeUrl;
-  if (!parser) { setYouTubeStatus('No se pudo cargar el validador. Recarga la página e inténtalo otra vez.', 'error'); return; }
-  const id = parser.getVideoId($('#youtube-url').value);
-  if (!id) {
-    setYouTubeStatus('No parece un enlace de vídeo válido de YouTube. Comprueba que incluya un ID de vídeo válido.', 'error');
-    $('#youtube-url').focus();
-    return;
-  }
-  setYouTubeStatus(`Formato de enlace válido (ID ${id}); esto no comprueba que el vídeo exista ni que tengas permiso. Esta web no extrae su audio. Sube una copia de audio autorizada para convertirla.`, 'notice');
-});
-$('#youtube-url').addEventListener('keydown', (event) => {
-  if (event.key === 'Enter') { event.preventDefault(); $('#check-youtube').click(); }
-});
-$('#youtube-url').addEventListener('input', () => setYouTubeStatus('Comprueba el formato del enlace. La conversión requiere un archivo de audio autorizado.', 'notice'));
 function encodeWav(buffer, sampleRate, channels) {
   const frames = buffer.length;
   const bytesPerSample = 2;

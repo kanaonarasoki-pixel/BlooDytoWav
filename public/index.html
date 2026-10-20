@@ -8,13 +8,12 @@
   <title>BlooDytoWav — Tu espacio de audio</title>
   <link rel="stylesheet" href="./styles.css">
   <script src="./audio-analysis.js" defer></script>
-  <script src="./youtube-url.js" defer></script>
   <script src="./app.js" defer></script>
 </head>
 <body>
 <div class="shell">
   <aside class="sidebar" id="sidebar">
-    <div class="brand"><div class="brand-mark" aria-hidden="true">♫</div><div class="brand-name">BlooDy<span>toWav</span></div></div>
+    <a class="brand" href="./index.html" aria-label="BlooDytoWav, inicio"><img src="./bloodytowav-logo.png" alt="BlooDytoWav"></a>
     <div class="nav-label">ESTUDIO</div>
     <nav class="nav" aria-label="Herramientas">
       <button class="active" data-page="youtube"><span aria-hidden="true">⇩</span> Audio a WAV</button>
@@ -29,7 +28,7 @@
   <main class="main">
     <header class="topbar">
       <button class="icon-btn mobilemenu" id="menu" aria-label="Abrir menú">☰</button>
-      <div class="mobilebrand"><div class="brand-mark">♫</div>BlooDytoWav</div>
+      <a class="mobilebrand" href="./index.html" aria-label="BlooDytoWav, inicio"><img src="./bloodytowav-logo.png" alt="BlooDytoWav"></a>
       <div class="crumb">Estudio <span> / </span> <b id="crumb">Audio a WAV</b></div>
       <div class="top-actions"><div class="status"><i class="dot"></i> Procesamiento local</div><button class="icon-btn" id="notifications" aria-label="Estado del estudio">i</button></div>
     </header>
@@ -41,14 +40,13 @@
       <div class="grid">
         <div class="card">
           <div class="card-head"><div><h2 id="page-youtube">Convertir audio a WAV</h2><p>Convierte una fuente de audio autorizada y descarga un WAV.</p></div><span class="tag">CONVERSIÓN LOCAL</span></div>
-          <div class="urlbox" aria-labelledby="youtube-check-label">
-            <label class="field-label" id="youtube-check-label" for="youtube-url">¿Tienes un enlace de YouTube?</label>
-            <div class="url-input"><span class="url-icon" aria-hidden="true">↗</span><input id="youtube-url" type="url" inputmode="url" placeholder="https://www.youtube.com/watch?v=…" autocomplete="url"><button type="button" id="check-youtube">Comprobar enlace</button></div>
-            <p class="source-note" id="youtube-status" role="status" aria-live="polite">El botón solo comprueba el formato del enlace; no verifica que exista ni los permisos. Esta web no extrae audio de YouTube. Sube una copia de audio autorizada.</p>
+          <div class="urlbox source-guidance" role="note">
+            <span class="guidance-icon" aria-hidden="true">ⓘ</span>
+            <p><strong>¿Vienes desde YouTube?</strong> Un enlace no contiene el archivo de audio, así que no se puede convertir aquí. Descarga o exporta una copia por un medio autorizado y selecciónala abajo.</p>
           </div>
           <label class="dropzone" id="drop1" for="file1" tabindex="0"><span class="upload-icon" aria-hidden="true">↑</span><b>Arrastra un archivo o <span>elige desde tu dispositivo</span></b><small>MP3, WAV, FLAC, M4A u otros formatos compatibles</small><small class="file-name" id="filename1">Los archivos no se suben a internet.</small><input id="file1" type="file" accept="audio/*" aria-label="Elegir archivo de audio para convertir"></label>
           <div class="options"><div><label class="field-label" for="quality">Frecuencia de muestreo</label><select id="quality" class="select"><option value="44100">WAV · 44,1 kHz</option><option value="48000">WAV · 48 kHz</option><option value="96000">WAV · 96 kHz</option></select></div><div><label class="field-label" for="channels">Canales</label><select id="channels" class="select"><option value="2">Estéreo</option><option value="1">Mono</option></select></div></div>
-          <button class="primary" id="convert">Elegir archivo de audio&nbsp; →</button><p class="microcopy">Procesamos únicamente el archivo que selecciones; no se extrae audio desde YouTube.</p>
+          <button class="primary" id="convert">Elegir archivo de audio&nbsp; →</button><p class="microcopy">El archivo se procesa en tu navegador; no se envía a internet.</p>
           <div class="inline-error" id="convert-error" role="alert" hidden></div>
           <div class="progress-message" id="convert-progress" role="status" aria-live="polite" hidden><span class="spinner" aria-hidden="true"></span><span id="convert-progress-text">Preparando el audio…</span></div>
           <div class="conversion-result" id="convert-result" aria-live="polite" hidden><div><b>WAV listo</b><p id="wav-details"></p></div><div class="result-actions"><button type="button" class="secondary-button" id="download-wav">Descargar WAV</button><button type="button" class="text-button" id="convert-another">Convertir otro archivo</button></div></div>

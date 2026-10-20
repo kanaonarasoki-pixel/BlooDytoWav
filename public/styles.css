@@ -10,13 +10,10 @@
 
 
 /* Tool refinements: link validation, real conversion status, and audio-analysis feedback */
-.urlbox{display:block;margin:0 0 16px;min-height:0;padding:16px 18px;background:#191720}
-.urlbox .field-label{margin-bottom:9px}
-.url-input{flex-wrap:wrap}
-.url-input button{white-space:nowrap}
-.source-note{margin:10px 0 0;color:#8f889a;font-size:10px;line-height:1.55}
-.source-note--error{color:#ffaaa9}
-.source-note--notice{color:#b6adc6}
+.urlbox{display:flex;align-items:flex-start;gap:11px;margin:0 0 16px;min-height:0;padding:15px 17px;background:#191720}
+.guidance-icon{flex:0 0 auto;color:#c1a5ff;font-size:17px;line-height:1.35}
+.source-guidance p{margin:0;color:#b6adc6;font-size:11px;line-height:1.6}
+.source-guidance strong{color:#e5def1;font-weight:600}
 .progress-message{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:14px;padding:12px;border:1px solid #473866;background:#211b2a;border-radius:10px;color:#d5c6fa;font-size:11px}
 .progress-message[hidden],.conversion-result[hidden]{display:none}
 .spinner{width:15px;height:15px;border:2px solid #655285;border-top-color:#c0a6ff;border-radius:50%;animation:spin .8s linear infinite;flex:none}
@@ -28,8 +25,15 @@
 .secondary-button{border:1px solid #7055a4;background:#382c50;color:#eee7ff;padding:10px 14px;border-radius:9px;font-size:11px;font-weight:700}
 .secondary-button:hover{background:#493764;border-color:#9c7bea}
 .text-button{border:0;background:transparent;color:#bba4f4;padding:8px;font-size:10px}
-.secondary-button:focus-visible,.text-button:focus-visible,.url-input button:focus-visible,.url-input input:focus-visible{outline:2px solid #b89aff;outline-offset:2px}
-@media(max-width:480px){.urlbox{padding:14px}.url-input{gap:7px}.url-input button{width:100%;padding:10px}.result-actions{align-items:stretch;flex-direction:column}.secondary-button,.text-button{width:100%}}
+.secondary-button:focus-visible,.text-button:focus-visible{outline:2px solid #b89aff;outline-offset:2px}
+@media(max-width:480px){.urlbox{padding:14px}.result-actions{align-items:stretch;flex-direction:column}.secondary-button,.text-button{width:100%}}
 .inline-error{margin-top:12px;padding:11px 13px;border:1px solid #6e383f;background:#311e27;border-radius:10px;color:#ffb3b0;font-size:11px;line-height:1.5}
 .inline-error[hidden],.spinner[hidden]{display:none}
 .progress-message--error{border-color:#6e383f;background:#311e27;color:#ffb3b0;justify-content:flex-start}
+/* BlooDytoWav brand image */
+.brand{display:flex;align-items:center;justify-content:center;width:100%;padding:0 0 24px;background:#000}
+.brand img{display:block;width:100%;height:auto;max-height:94px;object-fit:contain}
+.brand:focus-visible,.mobilebrand:focus-visible{outline:2px solid #b89aff;outline-offset:3px;border-radius:4px}
+.mobilebrand img{display:block;width:clamp(96px,34vw,128px);height:auto;max-height:56px;object-fit:contain}
+.urlbox.source-guidance{display:flex;align-items:flex-start;gap:11px;min-height:0;padding:15px 17px}
+@media(max-width:760px){.brand{padding-bottom:24px}.mobilebrand{display:flex;flex:0 1 auto;align-items:center;min-width:0}}
