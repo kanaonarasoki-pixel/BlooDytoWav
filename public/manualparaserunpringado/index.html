@@ -17,12 +17,28 @@
   <header class="topbar">
     <a class="brand" href="#inicio" aria-label="Manual Para Ser Un Pringado, inicio"><span class="brand-mark">M</span><span>Manual<small>PARA SER UN PRINGADO</small></span></a>
     <nav class="desktop-nav" aria-label="Navegación principal">
-      <a href="#como-funciona">Cómo funciona</a><a href="#personas">Personas</a><a href="#experiencia">La app</a><a href="#gustos">Intereses</a>
+      <a href="#app" data-app-nav="inicio">Inicio</a><a href="#app" data-app-nav="explorar">Explorar</a><a href="#app" data-app-nav="solicitudes">Solicitudes</a><a href="#como-funciona" data-landing-nav>Qué es Manual</a>
     </nav>
-    <div class="top-actions"><button class="text-button" id="login-open">Iniciar sesión</button><button class="button button-blue button-small" id="signup-open">Crear mi perfil <span aria-hidden="true">↗</span></button><button class="mobile-menu" id="mobile-menu" aria-label="Abrir menú" aria-expanded="false">☰</button></div>
+    <div class="top-actions"><button class="text-button" id="login-open">Mi perfil</button><button class="button button-blue button-small" id="signup-open">Crear mi perfil <span aria-hidden="true">↗</span></button><button class="mobile-menu" id="mobile-menu" aria-label="Abrir menú" aria-expanded="false">☰</button></div>
   </header>
 
-  <main>
+  <main class="social-app" id="app-view">
+    <div class="app-layout">
+      <aside class="app-sidebar"><div class="sidebar-greeting"><span class="eyebrow">TU ESPACIO</span><h1>Hola, <span id="greeting-name">bienvenido</span> <span aria-hidden="true">✳</span></h1><p>Un rincón para compartir lo que te gusta.</p></div><nav class="app-tabs" aria-label="Secciones de Manual"><button class="app-tab active" data-view="inicio">⌂ <span>Inicio</span></button><button class="app-tab" data-view="explorar">⌕ <span>Explorar personas</span></button><button class="app-tab" data-view="solicitudes">♡ <span>Solicitudes</span><b id="request-count">0</b></button><button class="app-tab" data-view="perfil">◉ <span>Mi perfil</span></button></nav><div class="local-status"><span class="status-dot"></span><div><b>Modo en este dispositivo</b><small>Tus datos se guardan aquí</small></div></div></aside>
+      <section class="app-content">
+        <div class="app-notice"><b>Estás usando la versión local de Manual.</b> Puedes crear publicaciones y organizar tu perfil en este navegador. Para conectar con personas reales desde otros dispositivos, la web necesita un servidor y cuentas online.</div>
+        <section class="app-view active" data-panel="inicio"><div class="app-section-title"><div><span class="eyebrow">TU COMUNIDAD</span><h2>Tu inicio</h2></div><button class="button button-outline" data-open-profile>Editar perfil</button></div>
+          <form class="composer" id="post-form"><div class="composer-avatar" id="composer-avatar">M</div><label class="sr-only" for="post-text">Comparte algo de tus aficiones</label><textarea id="post-text" name="text" maxlength="500" placeholder="¿Qué te apetece compartir hoy? Un juego, una canción, un dibujo…" required></textarea><div class="composer-bottom"><span>Comparte a tu ritmo · hasta 500 caracteres</span><button class="button button-blue button-small" type="submit">Publicar <span>↗</span></button></div></form>
+          <div class="feed-list" id="feed-list" aria-live="polite"></div>
+        </section>
+        <section class="app-view" data-panel="explorar" hidden><div class="app-section-title"><div><span class="eyebrow">AFICIONES QUE CONECTAN</span><h2>Explorar personas</h2><p>Perfiles de ejemplo para probar la experiencia. No son usuarios reales.</p></div></div><div class="explore-list" id="explore-list"></div></section>
+        <section class="app-view" data-panel="solicitudes" hidden><div class="app-section-title"><div><span class="eyebrow">SIN PRISA</span><h2>Tus solicitudes</h2><p>En esta versión quedan guardadas solo en este navegador.</p></div></div><div id="requests-list" class="requests-list"></div></section>
+        <section class="app-view" data-panel="perfil" hidden><div class="app-section-title"><div><span class="eyebrow">TU PERFIL</span><h2>Así te presentas</h2></div><button class="button button-blue" data-open-profile>Editar perfil <span>↗</span></button></div><div id="profile-card" class="profile-card"></div></section>
+      </section>
+    </div>
+  </main>
+
+  <main id="landing-view" hidden>
     <section class="hero" id="inicio">
       <div class="hero-copy">
         <div class="eyebrow"><span class="status-dot"></span> UN LUGAR PARA SER TÚ</div>
@@ -80,7 +96,7 @@
     <section class="final-cta"><span class="eyebrow">TU COMUNIDAD EMPIEZA CON UN INTERÉS</span><h2>Comparte lo que te gusta.<br><span>Encuentra tu sitio.</span></h2><button class="button button-blue" id="final-signup">Conocer Manual <span>↗</span></button><p>Manual Para Ser Un Pringado</p></section>
   </main>
 
-  <footer><a class="brand footer-brand" href="#inicio"><span class="brand-mark">M</span><span>Manual<small>PARA SER UN PRINGADO</small></span></a><p>Un espacio para descubrir personas con intereses en común.</p><a href="#inicio">Volver arriba ↑</a><small class="footer-note">Concepto de producto · Los perfiles de muestra no son personas reales</small></footer>
+  <footer id="landing-footer" hidden><a class="brand footer-brand" href="#inicio"><span class="brand-mark">M</span><span>Manual<small>PARA SER UN PRINGADO</small></span></a><p>Un espacio para descubrir personas con intereses en común.</p><a href="#inicio">Volver arriba ↑</a><small class="footer-note">Concepto de producto · Los perfiles de muestra no son personas reales</small></footer>
 
   <dialog class="profile-dialog" id="profile-dialog" aria-labelledby="dialog-title"><form method="dialog" class="dialog-dismiss"><button class="close-dialog" aria-label="Cerrar">×</button></form><div class="dialog-content"><div class="dialog-mark">M</div><span class="eyebrow">TU ESPACIO, TUS NORMAS</span><h2 id="dialog-title">Crea tu perfil Manual.</h2><p class="dialog-lede">Prueba cómo se vería tu perfil. En esta vista previa se guarda únicamente en este navegador.</p><form id="profile-form">
     <label>Tu nickname<input name="nickname" required minlength="2" maxlength="24" placeholder="por ejemplo, lunamora" autocomplete="nickname"></label>
