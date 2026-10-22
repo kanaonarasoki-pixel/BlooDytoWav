@@ -138,6 +138,13 @@ document.querySelector('#post-form').addEventListener('submit', event => {
 document.querySelectorAll('.app-tab').forEach(button => button.addEventListener('click', () => setView(button.dataset.view)));
 document.querySelectorAll('[data-app-nav]').forEach(link => link.addEventListener('click', event => { event.preventDefault(); setView(link.dataset.appNav); }));
 document.querySelectorAll('[data-landing-nav]').forEach(link => link.addEventListener('click', event => { event.preventDefault(); setView('acerca'); document.querySelector('#como-funciona').scrollIntoView({ behavior: 'smooth' }); }));
+document.querySelector('[data-preview-connect]')?.addEventListener('click', () => { setView('perfil'); renderProfile(); });
+document.querySelectorAll('[data-connect]').forEach(button => button.addEventListener('click', () => {
+  const requests = new Set(getRequests());
+  requests.has(button.dataset.connect) ? requests.delete(button.dataset.connect) : requests.add(button.dataset.connect);
+  save('manual-demo-requests', [...requests]); renderRequests(); renderPeople();
+  announce('Solicitud de prueba guardada en este navegador; no se envió a una persona real.');
+}));
 document.querySelector('#mobile-menu').addEventListener('click', event => {
   const nav = document.querySelector('.desktop-nav'); const open = nav.classList.toggle('open');
   event.currentTarget.setAttribute('aria-expanded', String(open)); event.currentTarget.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
