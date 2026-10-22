@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#15131c">
+  <meta name="description" content="Inksomnia: tatuajes personalizados, artistas con voz propia y un proceso pensado contigo.">
+  <title>Inksomnia — Tatuajes con intención</title>
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar" id="sidebar" aria-label="Navegación principal">
+      <a class="brand" href="#inicio" aria-label="Inksomnia, inicio"><span class="brand-mark" aria-hidden="true">I</span><span>INKSOMNIA<small>TATTOO STUDIO</small></span></a>
+      <span class="nav-label">EL ESTUDIO</span>
+      <nav class="nav">
+        <a href="#inicio" class="nav-link active"><span aria-hidden="true">⌂</span> Inicio</a>
+        <a href="#estilos" class="nav-link"><span aria-hidden="true">✳</span> Estilos</a>
+        <a href="#proceso" class="nav-link"><span aria-hidden="true">◌</span> Cómo trabajamos</a>
+        <a href="#cita" class="nav-link"><span aria-hidden="true">↗</span> Pedir cita</a>
+      </nav>
+      <div class="side-bottom">
+        <div class="pro-card"><small>HECHO A TU MEDIDA</small><p>Cada pieza empieza con una conversación y termina siendo solo tuya.</p><a href="#cita">Cuéntanos tu idea&nbsp; →</a></div>
+        <div class="profile"><div class="avatar">I</div><div><b>Inksomnia</b><small>Estudio creativo</small></div></div>
+      </div>
+    </aside>
+
+    <main class="main" id="inicio">
+      <header class="topbar">
+        <button class="icon-btn mobilemenu" id="menu" aria-label="Abrir menú" aria-expanded="false" aria-controls="sidebar">☰</button>
+        <a class="mobilebrand" href="#inicio" aria-label="Inksomnia, inicio"><span class="brand-mark" aria-hidden="true">I</span><span>INKSOMNIA</span></a>
+        <div class="crumb">Estudio <span>/</span> <b>Arte en la piel</b></div>
+        <div class="top-actions"><span class="status"><i class="dot"></i> Citas abiertas</span><a class="icon-btn top-cta" href="#cita" aria-label="Pedir una cita">↗</a></div>
+      </header>
+
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <div class="eyebrow"><span></span> TATUAJES CON INTENCIÓN</div>
+          <h1 id="hero-title">Lo que imaginas,<br><em>hecho tinta.</em></h1>
+          <p>Diseños únicos, pensados contigo y creados para acompañarte siempre. Tu historia merece una pieza propia.</p>
+          <div class="hero-actions"><a class="primary" href="#cita">Pide tu cita <span aria-hidden="true">↗</span></a><a class="quiet-link" href="#estilos">Explorar estilos <span aria-hidden="true">↓</span></a></div>
+          <div class="hero-proof"><span class="proof-icon">✳</span><span><b>Un diseño, una historia</b><small>Consulta personalizada antes de cada sesión</small></span></div>
+        </div>
+        <div class="hero-art" role="img" aria-label="Artista trabajando en un tatuaje en un estudio">
+          <div class="art-shade"></div><span class="art-kicker">INK / 001</span><div class="art-caption"><span>EL ARTE SE QUEDA</span><b>Tu piel, tu lienzo.</b></div><div class="art-stamp" aria-hidden="true">I<span>✳</span></div>
+        </div>
+      </section>
+
+      <section class="section" id="estilos" aria-labelledby="styles-title">
+        <div class="section-head"><div><div class="eyebrow">ENCUENTRA TU LENGUAJE</div><h2 id="styles-title">Estilos de tatuaje</h2><p>Una idea puede tomar muchas formas. Encuentra la que habla de ti.</p></div><a class="quiet-link desktop-link" href="#cita">¿Tienes otra idea? <span aria-hidden="true">↗</span></a></div>
+        <div class="filters" role="group" aria-label="Filtrar estilos de tatuaje">
+          <button class="filter active" type="button" data-filter="all" aria-pressed="true">Todos <span>06</span></button>
+          <button class="filter" type="button" data-filter="fineline" aria-pressed="false">Fine line</button>
+          <button class="filter" type="button" data-filter="realismo" aria-pressed="false">Realismo</button>
+          <button class="filter" type="button" data-filter="blackwork" aria-pressed="false">Blackwork</button>
+          <button class="filter" type="button" data-filter="floral" aria-pressed="false">Floral</button>
+          <button class="filter" type="button" data-filter="micro" aria-pressed="false">Microrealismo</button>
+        </div>
+        <div class="gallery" id="gallery">
+          <article class="work-card work-tall" data-style="realismo">
+            <img src="https://images.unsplash.com/photo-1645318588650-f0fb322cd740?auto=format&amp;fit=crop&amp;w=1000&amp;q=82" alt="Sesión de tatuaje en un estudio con luz ambiental" loading="lazy">
+            <div class="work-overlay"><span>01 / REALISMO</span><h3>Contraste y carácter</h3><a href="#cita" aria-label="Consultar sobre tatuajes de realismo">↗</a></div>
+          </article>
+          <article class="work-card" data-style="fineline floral">
+            <img src="https://images.unsplash.com/photo-1564426622559-5af68da63b96?auto=format&amp;fit=crop&amp;w=900&amp;q=82" alt="Detalle de un tatuaje realizado con líneas precisas" loading="lazy">
+            <div class="work-overlay"><span>02 / FINE LINE</span><h3>La belleza del detalle</h3><a href="#cita" aria-label="Consultar sobre tatuajes fine line">↗</a></div>
+          </article>
+          <article class="work-card" data-style="blackwork">
+            <img src="https://images.unsplash.com/photo-1679621551066-ba0ee68b680a?auto=format&amp;fit=crop&amp;w=900&amp;q=82" alt="Tatuaje blackwork en proceso" loading="lazy">
+            <div class="work-overlay"><span>03 / BLACKWORK</span><h3>Negro, forma, fuerza</h3><a href="#cita" aria-label="Consultar sobre tatuajes blackwork">↗</a></div>
+          </article>
+          <article class="work-card" data-style="micro realismo">
+            <img src="https://images.unsplash.com/photo-1661188777365-c8c299c6e272?auto=format&amp;fit=crop&amp;w=900&amp;q=82" alt="Artista tatuando con precisión un diseño de líneas finas" loading="lazy">
+            <div class="work-overlay"><span>04 / MICROREALISMO</span><h3>Pequeño, inolvidable</h3><a href="#cita" aria-label="Consultar sobre microrealismo">↗</a></div>
+          </article>
+          <article class="work-card work-tall" data-style="floral fineline">
+            <img src="https://images.unsplash.com/photo-1775135360402-bac00cc921c2?auto=format&amp;fit=crop&amp;w=1000&amp;q=82" alt="Diseño de tatuaje floral y ornamental en el brazo" loading="lazy">
+            <div class="work-overlay"><span>05 / FLORAL</span><h3>Formas que florecen</h3><a href="#cita" aria-label="Consultar sobre tatuajes florales">↗</a></div>
+          </article>
+          <article class="work-card" data-style="realismo blackwork">
+            <img src="https://images.unsplash.com/photo-1564426622559-5af68da63b96?auto=format&amp;fit=crop&amp;crop=right&amp;w=900&amp;q=82" alt="Detalle de tinta negra y sombreado en un tatuaje" loading="lazy">
+            <div class="work-overlay"><span>06 / CUSTOM</span><h3>Tu idea, sin etiquetas</h3><a href="#cita" aria-label="Consultar un diseño personalizado">↗</a></div>
+          </article>
+        </div>
+        <p class="gallery-note"><span>✳</span> Cada pieza se adapta a tu idea, anatomía y estilo. Las imágenes son referencias visuales.</p>
+      </section>
+
+      <section class="process" id="proceso" aria-labelledby="process-title">
+        <div class="process-intro"><div class="eyebrow">DE LA IDEA A LA PIEL</div><h2 id="process-title">Un proceso<br>hecho <em>contigo.</em></h2><p>Sin prisas y sin diseños en serie. Nos importa que te sientas parte de cada decisión.</p><a class="quiet-link" href="#cita">Empezar una conversación <span aria-hidden="true">↗</span></a></div>
+        <div class="steps">
+          <article class="step"><span>01</span><div><h3>Nos cuentas</h3><p>Comparte tu idea, referencias, zona del cuerpo y el tamaño que imaginas.</p></div><b aria-hidden="true">↗</b></article>
+          <article class="step"><span>02</span><div><h3>Lo diseñamos</h3><p>Hablamos contigo para encontrar el enfoque y el artista que mejor encaja.</p></div><b aria-hidden="true">↗</b></article>
+          <article class="step"><span>03</span><div><h3>Lo hacemos real</h3><p>Reservamos tu sesión y damos vida a una pieza pensada exclusivamente para ti.</p></div><b aria-hidden="true">✳</b></article>
+        </div>
+      </section>
+
+      <section class="booking section" id="cita" aria-labelledby="booking-title">
+        <div class="booking-copy"><div class="eyebrow">TU PRÓXIMA PIEZA EMPIEZA AQUÍ</div><h2 id="booking-title">Cuéntanos<br><em>qué imaginas.</em></h2><p>Déjanos los detalles para preparar una consulta. No necesitas tenerlo todo decidido.</p><div class="booking-note"><span>i</span><p>Este formulario prepara un resumen en tu dispositivo. No envía tus datos hasta que conectes un correo o servicio de reservas.</p></div></div>
+        <form class="booking-form" id="booking-form">
+          <div class="field-row"><label>Tu nombre<input name="name" autocomplete="name" required placeholder="¿Cómo te llamas?"></label><label>Tu email<input name="email" type="email" autocomplete="email" required placeholder="nombre@email.com"></label></div>
+          <div class="field-row"><label>Estilo que te interesa<select name="style"><option>Por definir</option><option>Fine line</option><option>Realismo</option><option>Blackwork</option><option>Floral</option><option>Microrealismo</option><option>Otro / personalizado</option></select></label><label>Zona del cuerpo<input name="placement" placeholder="Por ejemplo, antebrazo"></label></div>
+          <label>Cuéntanos tu idea<textarea name="idea" rows="4" placeholder="Tamaño aproximado, referencias, significado…"></textarea></label>
+          <button class="primary submit" type="submit">Preparar mi consulta <span aria-hidden="true">↗</span></button>
+          <div class="form-result" id="form-result" role="status" aria-live="polite" hidden><b>Tu consulta está preparada</b><p id="form-message">Aún no se ha enviado. Copia el resumen para compartirlo con el estudio.</p><button type="button" class="copy-button" id="copy-request">Copiar resumen</button></div>
+        </form>
+      </section>
+      <footer class="foot"><a href="#inicio" class="footer-brand"><span class="brand-mark">I</span> INKSOMNIA</a><span>Diseñado para ideas que merecen quedarse.</span><a href="#inicio">Volver arriba ↑</a></footer>
+    </main>
+  </div>
+</body>
+</html>
