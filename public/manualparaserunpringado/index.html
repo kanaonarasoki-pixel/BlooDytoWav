@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f9ff">
+  <meta name="description" content="Manual: encuentra gente con tus mismos gustos, sin presión y sin juicios.">
+  <title>Manual Para Ser Un Pringado — Encuentra tu comunidad</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./visual-updates.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#inicio" aria-label="Manual Para Ser Un Pringado, inicio"><span class="brand-mark">M</span><span>Manual<small>PARA SER UN PRINGADO</small></span></a>
+    <nav class="desktop-nav" aria-label="Navegación principal">
+      <a href="#como-funciona">Cómo funciona</a><a href="#personas">Personas</a><a href="#experiencia">La app</a><a href="#gustos">Intereses</a>
+    </nav>
+    <div class="top-actions"><button class="text-button" id="login-open">Iniciar sesión</button><button class="button button-blue button-small" id="signup-open">Crear mi perfil <span aria-hidden="true">↗</span></button><button class="mobile-menu" id="mobile-menu" aria-label="Abrir menú" aria-expanded="false">☰</button></div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="status-dot"></span> UN LUGAR PARA SER TÚ</div>
+        <h1>No tienes que<br>encajar con <span>todos.</span></h1>
+        <p class="hero-lede">Un espacio para encontrar personas con intereses parecidos, compartir tus aficiones a tu ritmo y conversar sin prejuicios.</p>
+        <div class="hero-actions"><button class="button button-blue" id="hero-signup">Encuentra a tu gente <span aria-hidden="true">→</span></button><a class="quiet-link" href="#como-funciona">Así funciona <span aria-hidden="true">↓</span></a></div>
+        <div class="trust-note"><span class="avatar-stack"><i>J</i><i>M</i><i>A</i></span><span>Aficiones distintas. Intereses que conectan.</span></div>
+      </div>
+      <div class="hero-art" aria-label="Vista previa ilustrada de Manual">
+        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+        <div class="community-visual"><img src="./assets/hangout-anime-game.png" alt="Ilustración de jóvenes compartiendo videojuegos, manga y dibujo en un espacio luminoso"><div class="community-shade"></div><div class="community-label"><span>MANUAL / COMUNIDAD</span><b>Lo que te gusta<br>es un buen comienzo.</b></div></div>
+        <article class="preview-card main-preview">
+          <div class="preview-top"><span class="mini-brand"><span class="mini-mark">M</span> MANUAL</span><span class="online-pill"><i></i> Para ti</span></div>
+          <div class="preview-post-art"><img src="./assets/hangout-anime-game.png" alt="Vista de una publicación sobre manga y videojuegos"><span>🎮 UNA TARDE TRANQUILA</span></div>
+          <div class="preview-profile"><div><h3>lunamora <span class="verified">✳</span></h3><p>Anime · juegos · ilustración</p></div><span class="match-score">4<small>EN COMÚN</small></span></div>
+          <div class="interest-list"><span>🎮 Juegos cozy</span><span>𖦹 Manga</span><span>♫ Lo-fi</span></div>
+          <button class="preview-connect" type="button" data-preview-connect>Ver perfil <span>↗</span></button>
+        </article>
+        <article class="floating-note note-top"><span class="note-icon">✳</span><span><b>Tu espacio, a tu ritmo</b><small>Nicknames y límites propios</small></span></article>
+        <article class="floating-note note-bottom"><span class="note-icon pale">♡</span><span><b>Intereses en común</b><small>Anime · juegos · música</small></span></article>
+        <div class="hero-label">MANUAL PARA SER UN PRINGADO<br>UNA COMUNIDAD PARA ENCONTRAR TU SITIO.</div>
+      </div>
+      <a class="scroll-cue" href="#como-funciona" aria-label="Desplazar a cómo funciona">↓</a>
+    </section>
+
+    <section class="section how-section" id="como-funciona">
+      <div class="section-heading"><span class="eyebrow">01 / EMPIEZA A TU MANERA</span><h2>Empieza con lo que<br><span>te representa.</span></h2><p>No necesitas construir un perfil perfecto. Manual te ayuda a descubrir puntos en común y abrir conversaciones de forma natural.</p></div>
+      <div class="steps-grid"><article class="step-card"><span class="step-number">01</span><div class="step-icon">◉</div><h3>Elige tu nickname</h3><p>Presenta tu perfil con el nombre que prefieras. Tú decides cuándo compartir algo más.</p></article><article class="step-card"><span class="step-number">02</span><div class="step-icon">⌘</div><h3>Comparte tus intereses</h3><p>Videojuegos, anime, manga, música y otras aficiones que forman parte de ti.</p></article><article class="step-card"><span class="step-number">03</span><div class="step-icon">↗</div><h3>Conecta a tu ritmo</h3><p>Descubre personas con intereses afines y envía una solicitud cuando te sientas preparado.</p></article></div>
+    </section>
+
+    <section class="section discover-section" id="personas">
+      <div class="discover-intro"><span class="eyebrow">02 / ENCUENTRA AFINIDADES</span><h2>Hay más personas<br>que comparten <span>tus gustos.</span></h2><p>Explora perfiles por intereses y, si lo prefieres, por zona. La ubicación siempre es opcional.</p><button class="button button-blue" id="discover-signup">Descubrir personas <span>→</span></button></div>
+      <div class="people-panel"><div class="panel-heading"><div><b>Personas para descubrir</b><small>Perfiles de ejemplo · zona elegida por ti</small></div><button class="filter-button" id="filter-toggle">⌄ <span>Afinidades</span></button></div>
+        <div class="person-card"><div class="person-avatar avatar-jules">J</div><div class="person-info"><div class="person-name">jules.exe <span class="online-dot"></span></div><p>Bilbao · usa nickname</p><div class="person-tags"><span>Hades</span><span>Anime</span><span>Indie rock</span></div></div><div class="person-match"><b>4</b><small>gustos en común</small></div><button class="connect-button" aria-label="Enviar solicitud a jules.exe" data-connect="jules.exe">+</button></div>
+        <div class="person-card"><div class="person-avatar avatar-noa">N</div><div class="person-info"><div class="person-name">noa.jpg <span class="online-dot muted"></span></div><p>Valencia · nickname visible</p><div class="person-tags"><span>Ghibli</span><span>Manga</span><span>Lo-fi</span></div></div><div class="person-match"><b>3</b><small>gustos en común</small></div><button class="connect-button" aria-label="Enviar solicitud a noa.jpg" data-connect="noa.jpg">+</button></div>
+        <div class="person-card"><div class="person-avatar avatar-river">R</div><div class="person-info"><div class="person-name">river.wav <span class="online-dot"></span></div><p>Tu zona · comparte cuando quiere</p><div class="person-tags"><span>Celeste</span><span>Pixel art</span><span>J-Rock</span></div></div><div class="person-match"><b>2</b><small>gustos en común</small></div><button class="connect-button" aria-label="Enviar solicitud a river.wav" data-connect="river.wav">+</button></div>
+        <div class="demo-disclaimer">Perfiles ilustrativos para enseñar cómo funciona Manual. Todavía no son usuarios reales.</div>
+      </div>
+    </section>
+
+    <section class="section app-gallery" id="experiencia">
+      <div class="gallery-heading"><span class="eyebrow">03 / ASÍ SE VE MANUAL</span><h2>Tus aficiones, en buena <span>compañía.</span></h2><p>Explora publicaciones, descubre afinidades y presenta tu perfil con el nivel de detalle que prefieras.</p></div>
+      <div class="screen-gallery">
+        <article class="app-screen screen-feed"><div class="screen-top"><span class="screen-logo"><i>M</i> Manual</span><span>⌕　♡</span></div><div class="screen-filter"><span class="active">Para ti</span><span>Juegos</span><span>Anime</span></div><div class="screen-photo"><img src="./assets/hangout-anime-game.png" alt="Ilustración de personas compartiendo anime y videojuegos en el feed"><span class="photo-pill">🎮 MOMENTO COZY</span></div><div class="screen-copy"><b>lunamora</b><p>Una tarde tranquila entre partidas, manga y café ☁</p><div class="screen-tags">#juegoscozy　#manga</div></div><div class="screen-bottom">⌂　⌕　＋　♡　◉</div></article>
+        <article class="app-screen screen-interests"><div class="screen-top"><span class="screen-title">Explora tus intereses</span><span>•••</span></div><div class="interest-hero-art"><div class="sparkle">✳</div><div class="orbit-face">☾</div><div class="interest-art-caption">HISTORIAS QUE<br>SE QUEDAN CONTIGO</div></div><div class="screen-copy"><span class="screen-kicker">DESCUBRE ALGO NUEVO</span><b>Anime & manga</b><p>Recomendaciones y conversaciones para compartir.</p></div><div class="topic-pills"><span>Slice of life</span><span>Fantasía</span><span>Shōnen</span></div><div class="screen-bottom">⌂　⌕　＋　♡　◉</div></article>
+        <article class="app-screen screen-profile"><div class="screen-top"><span class="screen-title">Tu perfil</span><span>⚙</span></div><div class="profile-cover"><div class="profile-avatar">N</div></div><div class="profile-info"><span class="profile-handle">noa.jpg　<span>✳</span></span><small>Nickname visible · Zaragoza</small><p>Anime, música y videojuegos independientes. Aquí comparto mis recomendaciones.</p><div class="profile-numbers"><span><b>8</b> intereses</span><span><b>3</b> comunidades</span></div></div><div class="screen-copy profile-interest-copy"><span class="screen-kicker">MIS INTERESES</span><div class="topic-pills"><span>🎮 Indies</span><span>𖦹 Ghibli</span><span>♫ J-rock</span></div></div><div class="screen-bottom">⌂　⌕　＋　♡　◉</div></article>
+      </div>
+      <div class="gallery-caption"><span class="gallery-dot"></span> Vistas conceptuales de la experiencia de Manual</div>
+    </section>
+
+    <section class="section interests-section" id="gustos"><div class="interests-copy"><span class="eyebrow">04 / TUS INTERESES</span><h2>Lo que te gusta<br>también puede <span>unir.</span></h2><p>Elige tus aficiones y encuentra comunidades donde hablar de ellas con naturalidad. Un juego, una canción o una historia pueden ser el primer punto en común.</p><button class="button button-outline" id="interests-signup">Añadir mis intereses <span>↗</span></button></div><div class="interest-cloud" aria-label="Categorías de intereses"><button class="interest-chip chip-large" data-chip>🎮 Videojuegos <small>124 temas</small></button><button class="interest-chip" data-chip>✦ Anime</button><button class="interest-chip" data-chip>📚 Manga</button><button class="interest-chip chip-dark" data-chip>♫ Música</button><button class="interest-chip" data-chip>🎨 Dibujo</button><button class="interest-chip chip-large chip-soft" data-chip>✿ Series y películas <small>86 temas</small></button><button class="interest-chip" data-chip>🪴 Plantas</button><button class="interest-chip chip-dark" data-chip>🧶 Hobbies tranquilos</button><button class="interest-chip" data-chip>🛹 Skate</button><span class="cloud-caption">Y muchas más cosas que te hacen ser tú.</span></div></section>
+
+    <section class="privacy-band"><div class="privacy-symbol">⌑</div><div><span class="eyebrow">TÚ MARCAS EL RITMO</span><h2>Tu perfil. Tus límites.</h2><p>Empieza con tu nickname. La ubicación exacta no se muestra. Tú eliges si quieres explorar por zona y quién puede ver tu nombre real.</p></div><button class="button button-white" id="privacy-signup">Crear perfil con calma <span>→</span></button></section>
+
+    <section class="final-cta"><span class="eyebrow">TU COMUNIDAD EMPIEZA CON UN INTERÉS</span><h2>Comparte lo que te gusta.<br><span>Encuentra tu sitio.</span></h2><button class="button button-blue" id="final-signup">Conocer Manual <span>↗</span></button><p>Manual Para Ser Un Pringado</p></section>
+  </main>
+
+  <footer><a class="brand footer-brand" href="#inicio"><span class="brand-mark">M</span><span>Manual<small>PARA SER UN PRINGADO</small></span></a><p>Un espacio para descubrir personas con intereses en común.</p><a href="#inicio">Volver arriba ↑</a><small class="footer-note">Concepto de producto · Los perfiles de muestra no son personas reales</small></footer>
+
+  <dialog class="profile-dialog" id="profile-dialog" aria-labelledby="dialog-title"><form method="dialog" class="dialog-dismiss"><button class="close-dialog" aria-label="Cerrar">×</button></form><div class="dialog-content"><div class="dialog-mark">M</div><span class="eyebrow">TU ESPACIO, TUS NORMAS</span><h2 id="dialog-title">Crea tu perfil Manual.</h2><p class="dialog-lede">Prueba cómo se vería tu perfil. En esta vista previa se guarda únicamente en este navegador.</p><form id="profile-form">
+    <label>Tu nickname<input name="nickname" required minlength="2" maxlength="24" placeholder="por ejemplo, lunamora" autocomplete="nickname"></label>
+    <label>Tu zona <span class="optional-label">opcional</span><input name="location" maxlength="60" placeholder="Ciudad o provincia, sin dirección exacta"></label>
+    <label>Nombre real <span class="optional-label">opcional</span><input name="realName" maxlength="60" placeholder="Puedes dejarlo en blanco"></label>
+    <fieldset><legend>¿Qué te gusta? <span class="optional-label">elige los que quieras</span></legend><div class="form-interests"><label><input type="checkbox" name="interests" value="Videojuegos"> Videojuegos</label><label><input type="checkbox" name="interests" value="Anime"> Anime</label><label><input type="checkbox" name="interests" value="Manga"> Manga</label><label><input type="checkbox" name="interests" value="Música"> Música</label><label><input type="checkbox" name="interests" value="Dibujo"> Dibujo</label><label><input type="checkbox" name="interests" value="Series y películas"> Series y películas</label></div></fieldset>
+    <label class="privacy-toggle"><input type="checkbox" name="showRealName"><span><b>Mostrar mi nombre real</b><small>Desactivado por defecto. Puedes mantener solo tu nickname.</small></span></label>
+    <p class="local-note">Esta es una demostración privada en tu dispositivo. Todavía no crea una cuenta online ni conecta con otras personas.</p>
+    <button class="button button-blue submit-button" type="submit">Guardar vista previa <span>→</span></button><div class="form-feedback" id="form-feedback" role="status" aria-live="polite"></div>
+  </form></div></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
