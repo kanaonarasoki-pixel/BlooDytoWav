@@ -2,11 +2,11 @@
 <html lang="es">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#131214"><meta name="description" content="Tu universo del tatuaje. Descubre piezas, guarda inspiración y encuentra a tu artista.">
+  <meta name="theme-color" content="#131214"><meta name="description" content="Scar. Encuentra tu estilo en tu zona. Un atlas de tatuajes, artistas y experiencias con identidad propia.">
   <meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <title>Inksomnia — Tu próxima tinta</title>
-  <link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="./assets/icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="./assets/icon-192.png">
-  <link rel="stylesheet" href="./style.css"><script src="./app.js" defer></script>
+  <title>Scar — Encuentra tu estilo en tu zona</title>
+  <link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="./assets/icon.svg?v=scar3" type="image/svg+xml"><link rel="apple-touch-icon" href="./assets/icon-192.png?v=scar3">
+  <link rel="stylesheet" href="./style.css?v=scar3"><link rel="stylesheet" href="./scar.css?v=scar3"><script src="./app.js?v=scar3" defer></script>
 </head>
 <body>
   <svg class="svg-defs" aria-hidden="true"><defs>
@@ -23,7 +23,7 @@
   <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></symbol>
   </defs></svg>
   <aside class="sidebar">
-    <a class="brand" href="#explorar" aria-label="Inksomnia, inicio"><span class="brand-mark">I</span><span>INKSOMNIA<small>TATTOO COMMUNITY</small></span></a>
+    <a class="brand" href="#explorar" aria-label="Scar, inicio"><span class="brand-mark" aria-hidden="true">///</span><span>SCAR<small>TINTA CON IDENTIDAD</small></span></a>
     <span class="nav-label">TU UNIVERSO</span>
     <nav class="main-nav" aria-label="Navegación principal">
       <a href="#explorar" data-nav="explorar"><svg><use href="#i-grid"/></svg><span>Explorar</span></a>
@@ -33,12 +33,12 @@
       <a href="#perfil" data-nav="perfil"><svg><use href="#i-user"/></svg><span>Mi espacio</span></a>
     </nav>
     <button class="primary publish-button" data-action="publish"><svg><use href="#i-plus"/></svg>Publicar una pieza</button>
-    <div class="sidebar-bottom"><div class="side-note"><span class="asterisk">✳</span><p>Solo tatuajes.<br><strong>Siempre.</strong></p></div><button class="install-button" data-action="install"><svg><use href="#i-download"/></svg>Instalar Inksomnia</button><button class="account" data-action="profile"><span class="avatar">T</span><span id="account-name">Tu espacio<small>Perfil local · versión de prueba</small></span><span>↗</span></button></div>
+    <div class="sidebar-bottom"><div class="side-note"><span class="asterisk">✳</span><p>Solo tatuajes.<br><strong>Siempre.</strong></p></div><button class="install-button" data-action="install"><svg><use href="#i-download"/></svg>Instalar Scar</button><button class="account" data-action="profile"><span class="avatar">T</span><span id="account-name">Tu espacio<small>Perfil local · versión de prueba</small></span><span>↗</span></button></div>
   </aside>
   <div class="app-shell">
-    <header class="topbar"><a class="mobile-brand" href="#explorar">I<span>INKSOMNIA</span></a><span class="breadcrumb">La inspiración empieza aquí.</span><div class="top-actions"><button class="location-button" data-action="location"><svg><use href="#i-pin"/></svg><span id="location-label">Todas las ciudades</span><span class="chevron">⌄</span></button><button class="avatar" data-action="profile" aria-label="Abrir mi perfil">T</button></div></header>
+    <header class="topbar"><a class="mobile-brand" href="#explorar"><b aria-hidden="true">///</b><span>SCAR</span></a><span class="breadcrumb">SCAR / TU PIEL. TU CRITERIO.</span><div class="top-actions"><button class="location-button" data-action="location"><svg><use href="#i-pin"/></svg><span id="location-label">Todas las ciudades</span><span class="chevron">⌄</span></button><button class="avatar" data-action="profile" aria-label="Abrir mi perfil">T</button></div></header>
     <main id="main" tabindex="-1"></main>
-    <footer class="app-footer"><span>INKSOMNIA © 2026</span><span>Hecho de tinta. Hecho de personas.</span><button data-action="about">Sobre esta versión</button></footer>
+    <footer class="app-footer"><span>SCAR © 2026</span><span>Tu piel. Tu estilo. Tu huella.</span><button data-action="about">Sobre esta versión</button></footer>
   </div>
   <nav class="mobile-nav" aria-label="Navegación móvil"><a href="#explorar" data-nav="explorar"><svg><use href="#i-grid"/></svg><span>Explorar</span></a><a href="#artistas" data-nav="artistas"><svg><use href="#i-search"/></svg><span>Artistas</span></a><button data-action="publish" aria-label="Publicar una pieza"><svg><use href="#i-plus"/></svg></button><a href="#guardados" data-nav="guardados"><svg><use href="#i-bookmark"/></svg><span>Guardados</span></a><a href="#perfil" data-nav="perfil"><svg><use href="#i-user"/></svg><span>Mi espacio</span></a></nav>
   <dialog id="modal"><button class="close-dialog" aria-label="Cerrar ventana"><svg><use href="#i-close"/></svg></button><div id="modal-content"></div></dialog>
