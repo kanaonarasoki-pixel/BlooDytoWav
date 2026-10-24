@@ -81,7 +81,7 @@
     if (!form.reportValidity()) return;
     const data = new FormData(form);
     requestText = [
-      'Consulta para Inksomnia',
+      'Consulta para Scar',
       `Nombre: ${data.get('name')}`,
       `Email: ${data.get('email')}`,
       `Estilo: ${data.get('style')}`,
