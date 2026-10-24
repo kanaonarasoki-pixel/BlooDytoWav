@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#131214"><meta name="description" content="Tu universo del tatuaje. Descubre piezas, guarda inspiración y encuentra a tu artista.">
+  <meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Inksomnia — Tu próxima tinta</title>
+  <link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="./assets/icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="./assets/icon-192.png">
+  <link rel="stylesheet" href="./style.css"><script src="./app.js" defer></script>
+</head>
+<body>
+  <svg class="svg-defs" aria-hidden="true"><defs>
+  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="7.2"/><path d="m16 16 5 5"/></symbol>
+  <symbol id="i-bookmark" viewBox="0 0 24 24"><path d="M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16l-6-4z"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 4v16M4 12h16"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 2v6m10-6v6M3 11h18m-12 4h6"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
+  <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 7h16M4 17h16"/><circle cx="9" cy="7" r="3"/><circle cx="15" cy="17" r="3"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></symbol>
+  </defs></svg>
+  <aside class="sidebar">
+    <a class="brand" href="#explorar" aria-label="Inksomnia, inicio"><span class="brand-mark">I</span><span>INKSOMNIA<small>TATTOO COMMUNITY</small></span></a>
+    <span class="nav-label">TU UNIVERSO</span>
+    <nav class="main-nav" aria-label="Navegación principal">
+      <a href="#explorar" data-nav="explorar"><svg><use href="#i-grid"/></svg><span>Explorar</span></a>
+      <a href="#artistas" data-nav="artistas"><svg><use href="#i-search"/></svg><span>Artistas</span></a>
+      <a href="#guardados" data-nav="guardados"><svg><use href="#i-bookmark"/></svg><span>Guardados</span><small id="saved-count">0</small></a>
+      <a href="#citas" data-nav="citas"><svg><use href="#i-calendar"/></svg><span>Mis solicitudes</span></a>
+      <a href="#perfil" data-nav="perfil"><svg><use href="#i-user"/></svg><span>Mi espacio</span></a>
+    </nav>
+    <button class="primary publish-button" data-action="publish"><svg><use href="#i-plus"/></svg>Publicar una pieza</button>
+    <div class="sidebar-bottom"><div class="side-note"><span class="asterisk">✳</span><p>Solo tatuajes.<br><strong>Siempre.</strong></p></div><button class="install-button" data-action="install"><svg><use href="#i-download"/></svg>Instalar Inksomnia</button><button class="account" data-action="profile"><span class="avatar">T</span><span id="account-name">Tu espacio<small>Perfil local · versión de prueba</small></span><span>↗</span></button></div>
+  </aside>
+  <div class="app-shell">
+    <header class="topbar"><a class="mobile-brand" href="#explorar">I<span>INKSOMNIA</span></a><span class="breadcrumb">La inspiración empieza aquí.</span><div class="top-actions"><button class="location-button" data-action="location"><svg><use href="#i-pin"/></svg><span id="location-label">Todas las ciudades</span><span class="chevron">⌄</span></button><button class="avatar" data-action="profile" aria-label="Abrir mi perfil">T</button></div></header>
+    <main id="main" tabindex="-1"></main>
+    <footer class="app-footer"><span>INKSOMNIA © 2026</span><span>Hecho de tinta. Hecho de personas.</span><button data-action="about">Sobre esta versión</button></footer>
+  </div>
+  <nav class="mobile-nav" aria-label="Navegación móvil"><a href="#explorar" data-nav="explorar"><svg><use href="#i-grid"/></svg><span>Explorar</span></a><a href="#artistas" data-nav="artistas"><svg><use href="#i-search"/></svg><span>Artistas</span></a><button data-action="publish" aria-label="Publicar una pieza"><svg><use href="#i-plus"/></svg></button><a href="#guardados" data-nav="guardados"><svg><use href="#i-bookmark"/></svg><span>Guardados</span></a><a href="#perfil" data-nav="perfil"><svg><use href="#i-user"/></svg><span>Mi espacio</span></a></nav>
+  <dialog id="modal"><button class="close-dialog" aria-label="Cerrar ventana"><svg><use href="#i-close"/></svg></button><div id="modal-content"></div></dialog>
+  <div id="toast" role="status" aria-live="polite"></div>
+</body></html>
